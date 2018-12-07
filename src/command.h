@@ -85,8 +85,11 @@ void Command::run() {
       }
     }
     else if(std::string(argc[1]) == "-e"){
-      stat(argc[2], &buff);
-      if(S_ISREG(buff.st_mode) || S_ISDIR(buff.st_mode)){
+      if(stat(argc[2], &buff) == -1){
+        std::cout<<"(False)"<<std::endl;
+        exit(2);
+      }
+      else if(S_ISREG(buff.st_mode) || S_ISDIR(buff.st_mode)){
         std::cout<<"(True)"<<std::endl;
         exit(0);
       }
@@ -96,7 +99,10 @@ void Command::run() {
       }
     }
     else if(std::string(argc[1]) == "-f"){
-      stat(argc[2], &buff);
+      if(stat(argc[2], &buff) == -1){
+        std::cout<<"(False)"<<std::endl;
+        exit(2);
+      }
       if(S_ISREG(buff.st_mode)){
         std::cout<<"(True)"<<std::endl;
         exit(0);
@@ -107,8 +113,11 @@ void Command::run() {
       }
     }
     else if(std::string(argc[1]) == "-d"){
-      stat(argc[2], &buff);
-      if(S_ISDIR(buff.st_mode)){
+      if(stat(argc[2], &buff) == -1){
+        std::cout<<"(False)"<<std::endl;
+        exit(2);
+      }
+      else if(S_ISDIR(buff.st_mode)){
         std::cout<<"(True)"<<std::endl;
         exit(0);
       }
