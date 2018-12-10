@@ -5,71 +5,72 @@
 
 
 /*Command Tests*/
-TEST(TEST_VALID_COMMAND, ls){
+TEST(COMMAND, VALID){
   EXPECT_EQ(0, test_valid_command());
 }
 
-TEST(TEST_INVALID_COMMAND, qs){
+TEST(COMMAND, INVALID){
   EXPECT_EQ(2, test_invalid_command());
 }
 
-TEST(TEST_EMPTY_COMMAND, EMPTY){
+TEST(COMMAND, EMPTY){
   EXPECT_EQ(2, test_empty_command());
 }
 
-TEST(TEST_EXIT_COMMAND, EXIT){
+TEST(COMMAND, EXIT){
   EXPECT_EQ(3, test_exit_command());
 }
 
-TEST(TEST_VALID_COMMAND_WITH_ARGUMENT, LS_A){
+TEST(COMMAND, VALID_ARGUMENT){
   EXPECT_EQ(0, test_valid_command_with_argument());
 }
 
-TEST(TEST_VALID_COMMAND_WITH_EMPTY_ARGUMENT, LS_){
+TEST(COMMAND, EMPTY_ARGUMENT){
   EXPECT_EQ(2, test_valid_command_with_empty_argument());
 }
 
-TEST(TEST_INVALID_COMMAND_WITH_ARGUMENT, QS_A){
+TEST(COMMAND, INVALID_COMMAND_ARGUMENT){
   EXPECT_EQ(2, test_invalid_command_with_argument());
 }
 
-TEST(TEST_VALID_TEST_E_COMMAND, SRC){
+/*TEST COMMAND*/
+TEST(TEST_COMMAND, VALID_E){
   EXPECT_EQ(0, test_valid_test_e_command());
 }
 
-TEST(TEST_INVALID_TEST_E_COMMAND, ASDF){
+TEST(TEST_COMMAND, INVALID_E){
   EXPECT_EQ(2, test_invalid_test_e_command());
 }
 
-TEST(TEST_VALID_TEST_D_COMMAND, SRC){
+TEST(TEST_COMMAND, VALID_D){
   EXPECT_EQ(0, test_valid_test_d_command());
 }
 
-TEST(TEST_INVALID_TEST_D_COMMAND, TEST){
+TEST(TEST_COMMAND, INVALID_D){
   EXPECT_EQ(2, test_invalid_test_d_command());
 }
 
-TEST(TEST_VALID_TEST_F_COMMAND, TEST){
+TEST(TEST_COMMAND, VALID_F){
   EXPECT_EQ(0, test_valid_test_f_command());
 }
 
-TEST(TEST_INVALID_TEST_F_COMMAND, SRC){
+TEST(TEST_COMMAND, INVALID_F){
   EXPECT_EQ(2, test_invalid_test_f_command());
 }
 
-TEST(TEST_VALID_ONE_ARGUMENT_TEST_COMMAND, SRC){
+TEST(TEST_COMMAND, VALID_ONE_ARGUMENT){
   EXPECT_EQ(0, test_valid_one_argument_test_command());
 }
 
-TEST(TEST_INVALID_ONE_ARGUMENT_TEST_COMMAND, S){
+TEST(TEST_COMMAND, INVALID_ONE_ARGUMENT){
   EXPECT_EQ(2, test_invalid_one_argument_test_command());
 }
 
-TEST(TEST_ZERO_ARGUMENT_TEST_COMMAND, EMPTY){
+TEST(TEST_COMMAND, EMPTY){
   EXPECT_EQ(2, test_zero_argument_test_command());
 }
 
-TEST(TEST_THREE_ARGUMENT_TEST_COMMAND, SRC_FAIL){
+TEST(TEST_COMMAND, THREE_ARGUMENT){
   EXPECT_EQ(2, test_three_argument_test_command());
 }
 
@@ -97,27 +98,27 @@ TEST(OR, EQIT_OR_QS){
 }
 
 /*Parse Tests*/
-TEST(TEST_VALID_PARSE, ls){
+TEST(PARSE, VALID_COMMAND){
   EXPECT_EQ(0, test_valid_parse());
 }
 
-TEST(TEST_INVALID_PARSE, qs){
+TEST(PARSE, INVALID_COMMAND){
   EXPECT_EQ(2, test_invalid_parse());
 }
 
-TEST(TEST_EXIT_PARSE, EXIT){
+TEST(PARSE, EXIT_COMMAND){
   EXPECT_EQ(3, test_exit_parse());
 }
 
-TEST(TEST_VALID_PARSE_WITH_ARGUMENT, LS_A){
+TEST(PARSE, COMMAND_WITH_ARGUMENT){
   EXPECT_EQ(0, test_valid_parse_with_arg());
 }
 
-TEST(TEST_VALID_PARSE_WITH_EMPTY_ARGUMENT, LS_){
+TEST(PARSE, COMMAND_EMPTY_ARGUMENTS){
   EXPECT_EQ(0, test_valid_parse_with_empty_arg());
 }
 
-TEST(TEST_INVALID_PARSE_WITH_ARGUMENT, QS_A){
+TEST(PARSE, INVALID_COMMAND_WITH_ARGUMENT){
   EXPECT_EQ(2, test_invalid_parse_with_arg());
 }
 
@@ -204,26 +205,36 @@ TEST(BRACKET, INVALID_TEST_STRING){
 
 //Precedence Test
 
-TEST(BRACKET, VALID_PRESEDENCE){
+TEST(PRECEDENCE, VALID_PRECEDENCE){
   EXPECT_EQ(0, test_valid_precedence());
 }
 
-TEST(BRACKET, IN_VALID_LEFT_PRESEDENCE){
+TEST(PRECEDENCE, IN_VALID_LEFT_PRECEDENCE){
   EXPECT_EQ(2, test_invalid_left_precedence());
 }
 
-TEST(BRACKET, IN_VALID_RIGHT_PRESEDENCE){
+TEST(PRECEDENCE, IN_VALID_RIGHT_PRECEDENCE){
   EXPECT_EQ(2, test_invalid_right_precedence());
 }
 
-TEST(BRACKET, IN_INVALID_MISMATCH_PRESEDENCE){
+TEST(PRECEDENCE, IN_INVALID_MISMATCH_PRECEDENCE){
   EXPECT_EQ(2, test_invalid_mismatch_precedence());
 }
 
-TEST(BRACKET, VALID_LONG_PRESEDENCE){
+TEST(PRECEDENCE, VALID_LONG_PRECEDENCE){
   EXPECT_EQ(0, test_valid_long_precedence());
 }
 
+/*PIPING*/
+TEST(REDIRECTION, BASIC_PIPE){
+  EXPECT_EQ(0, test_pipe());
+}
+
+TEST(REDIRECTION, NECESSARY_CASE){
+  EXPECT_EQ(0, test_necessary_case());
+}
+
+/*MAIN*/
 int main(int argc, char **argv){
   ::testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();
