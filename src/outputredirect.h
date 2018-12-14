@@ -6,7 +6,9 @@
 #include <fcntl.h>
 #include <stdio.h>
 
+
 class OutputRedirect: public Connector{
+
 public:
   /* Constructors */
   OutputRedirect():Connector(">"){}
@@ -20,6 +22,7 @@ public:
   }
   /* Processor */
   void run();
+  /* Destructor */
   ~OutputRedirect() = default;
 
   /* Friend Function */
@@ -39,10 +42,10 @@ void OutputRedirect::run(){
   }
 }
 
-
 /* Non-member Function */
 void swap(OutputRedirect& a, OutputRedirect& b) {
     swap(dynamic_cast<Connector&>(a), dynamic_cast<Connector&>(b));
 }
+
 
 #endif

@@ -7,6 +7,7 @@
 
 
 class OutputRedirectAppend: public Connector{
+
 public:
   /* Constructors */
   OutputRedirectAppend():Connector(">>"){}
