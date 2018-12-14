@@ -41,6 +41,7 @@ void OutputRedirectAppend::run(){
   }
 }
 
+/* Non-member Function */
 void swap(OutputRedirectAppend& a, OutputRedirectAppend& b) {
   swap(dynamic_cast<Connector&>(a), dynamic_cast<Connector&>(b));
 }

@@ -7,11 +7,27 @@
 #include <stdio.h>
 #include <sys/wait.h>
 
+
 class Pipe: public Connector{
+
 public:
+  /* Constructors */
   Pipe():Connector("|"){}
   Pipe(Base* left) : Connector("|", left){}
+  /* Copy Constructor */
+  Pipe(const Pipe& RHS) : Connector(dynamic_cast<const Connector&>(RHS)) {}
+  /* Assignment Operator */
+  Pipe operator= (Pipe RHS) {
+    swap(*this, RHS);
+    return *this;
+  }
+  /* Processor */
   void run();
+  /* Destructor */
+  ~Pipe() = default;
+
+  /* Friend Function */
+  friend void swap(Pipe& a, Pipe& b);
 };
 
 void Pipe::run(){
@@ -56,4 +72,11 @@ void Pipe::run(){
     }
   }
 }
+
+/* Non-member Function */
+void swap(Pipe& a, Pipe& b) {
+    swap(dynamic_cast<Connector&>(a), dynamic_cast<Connector&>(b));
+}
+
+
 #endif
