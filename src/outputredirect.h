@@ -8,9 +8,22 @@
 
 class OutputRedirect: public Connector{
 public:
+  /* Constructors */
   OutputRedirect():Connector(">"){}
   OutputRedirect(Base* left) : Connector(">", left){}
+  /* Copy Constructor */
+  OutputRedirect(const OutputRedirect& RHS) : Connector(dynamic_cast<const Connector&>(RHS)) {}
+  /* Assignment Operator */
+  OutputRedirect& operator= (OutputRedirect RHS) {
+    swap(*this, RHS);
+    return *this;
+  }
+  /* Processor */
   void run();
+  ~OutputRedirect() = default;
+
+  /* Friend Function */
+  friend void swap(OutputRedirect& a, OutputRedirect& b); 
 };
 
 void OutputRedirect::run(){
@@ -25,4 +38,11 @@ void OutputRedirect::run(){
     exit(errno);
   }
 }
+
+
+/* Non-member Function */
+void swap(OutputRedirect& a, OutputRedirect& b) {
+    swap(dynamic_cast<Connector&>(a), dynamic_cast<Connector&>(b));
+}
+
 #endif
