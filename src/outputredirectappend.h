@@ -5,11 +5,26 @@
 #include <unistd.h>
 #include <fcntl.h>
 
+
 class OutputRedirectAppend: public Connector{
 public:
+  /* Constructors */
   OutputRedirectAppend():Connector(">>"){}
   OutputRedirectAppend(Base* left) : Connector(">>", left){}
+  /* Copy Constructor */
+  OutputRedirectAppend(const OutputRedirectAppend& RHS) : Connector(dynamic_cast<const OutputRedirectAppend&>(RHS)) {}
+  /* Assignment Operator */
+  OutputRedirectAppend& operator= (OutputRedirectAppend RHS) {
+    swap(*this, RHS);
+    return *this;
+  }
+  /* Processor */
   void run();
+  /* Destructor */
+  ~OutputRedirectAppend() = default;
+
+  /* Friend Function */
+  friend void swap(OutputRedirectAppend& a, OutputRedirectAppend& b);
 };
 
 void OutputRedirectAppend::run(){
@@ -24,4 +39,10 @@ void OutputRedirectAppend::run(){
     exit(errno);
   }
 }
+
+void swap(OutputRedirectAppend& a, OutputRedirectAppend& b) {
+  swap(dynamic_cast<Connector&>(a), dynamic_cast<Connector&>(b));
+}
+
+
 #endif
