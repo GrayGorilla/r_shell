@@ -305,7 +305,7 @@ int test_pipe() {
 }
 
 int test_necessary_case() {
-  Parse prs("(cat < CMakeLists.txt | tr A-Z a-z | tee temp1.txt | tr a-z A-Z > temp2.txt) && rm temp1.txt; rm temp2.txt");
+  Parse prs("(cat < CMakeLists.txt | tr A-Z a-z | tee temp1.txt | tr a-z A-Z > temp2.txt) && (rm temp1.txt; rm temp2.txt)");
   int exitVal = 0;
     pid_t pid = fork();
     if (pid == 0){
