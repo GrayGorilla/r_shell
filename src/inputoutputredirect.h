@@ -5,11 +5,26 @@
 #include <unistd.h>
 #include <fcntl.h>
 
+
 class InputOutputRedirect: public Connector{
 public:
+  /* Constructors */
   InputOutputRedirect():Connector("<>"){}
   InputOutputRedirect(Base* left) : Connector("<>", left){}
+  /* Copy Constructor */
+  InputOutputRedirect(const InputOutputRedirect& RHS) : Connector(dynamic_cast<const Connector&>(RHS)) {}
+  /* Assignment Operator */
+  InputOutputRedirect& operator= (InputOutputRedirect RHS) {
+    swap(*this, RHS);
+    return *this;
+  }
+  /* Processor */
   void run();
+  /* Destructor */
+  ~InputOutputRedirect() = default;
+
+  /* Friend Function */
+  friend void swap(InputOutputRedirect& a, InputOutputRedirect& b);
 };
 
 void InputOutputRedirect::run(){
@@ -25,4 +40,11 @@ void InputOutputRedirect::run(){
     exit(errno);
   }
 }
+
+/* Non-member Function */
+void swap(InputOutputRedirect& a, InputOutputRedirect& b) {
+    swap(dynamic_cast<Connector&>(a), dynamic_cast<Connector&>(b));
+}
+
+
 #endif
